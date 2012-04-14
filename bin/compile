@@ -1,0 +1,22 @@
+#!/bin/sh
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+
+PHANTOM_VERSION="1.5.0"
+PHANTOM_PACKAGE="phantomjs.googlecode.com/files/phantomjs-1.5.0-linux-x86-dynamic.tar.gz"
+
+echo "-----> Vendoring PhantomJS 1.5.0"
+
+VENDORED_PHANTOM="$BUILD_DIR/vendor/phantom"
+
+mkdir -p $VENDORED_PHANTOM  && curl $PHANTOM_PACKAGE -s -o -  | tar zxvf - -C $VENDORED_PHANTOM
+
+# Set up so we can use PhantomJS right away
+export PATH="$VENDORED_PHANTOM/bin:$PATH"
+
+echo "Using PhantomJS $PHANTOM_VERSION" | indent

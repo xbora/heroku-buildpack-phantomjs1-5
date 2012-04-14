@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# this pack is valid for apps with a phantomjs.conf in the root
+if [ -f $1/phantomjs.conf ]; then
+  echo "PhantomJS"
+  exit 0
+else
+  exit 1
+fi
